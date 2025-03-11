@@ -1,0 +1,21 @@
+spring:
+    profiles:
+        active: loc
+
+    mvc:
+        trailing-slash-match: true
+
+server:
+    port: 8989
+    servlet:
+        context-path: /
+        session:
+            persistent: false
+
+# mybatis setting
+mybatis:
+    check-config-location: true
+    type-aliases-package: com.xxddongxxcheckinn.*.*.model
+    config-location: classpath:mybatis-config.xml
+    mapper-locations: classpath:mapper/*/*.xml
+
