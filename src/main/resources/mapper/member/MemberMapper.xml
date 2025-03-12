@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapepr 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxddongxx.checkinn.member.mapper.MemberMapper">
+    <select id="selectByMember" resultType="Member">
+        /* selectByMember */
+        SELECT
+            *
+        FROM tb_user tu
+        WHERE
+            tu.delete_at = 'N'
+            AND tu.user_id = #{userId}
+    </select>
+    <select id="isDuplicate" resultType="boolean">
+        /* isDuplicate */
+        SELECT
+            IF(COUNT(*) > 0, 1, 0)
+        FROM tb_user tu
+        WHERE
+            tu.user_id = #{userId}
+            AND tu.delete_at = 'N'
+    </select>
+    <insert id="insertMember" parameterType="Member">
+        /* insertMember */
+        INSERT INTO tb_user(
+            user_id
+            , password
+            , nm
+            , `role`
+            , email
+            , phone
+            , delete_at
+        )
+        VALUES (
+            #{userId}
+            , #{password}
+            , #{nm}
+            , #{role}
+            , #{email}
+            , #{phone}
+            , #{deleteAt}
+        )
+    </insert>
+</mapper>

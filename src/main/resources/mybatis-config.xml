@@ -12,7 +12,7 @@
     </settings>
 
     <typeAliases>
-        <package name="com.selfcheckin.*.*.model"/>
+        <package name="com.xxddongxx.checkinn.member.model"/>
     </typeAliases>
 
 </configuration>

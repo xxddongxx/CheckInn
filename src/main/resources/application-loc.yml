@@ -11,7 +11,7 @@ spring:
 
     datasource:
         driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-        url: jdbc:log4jdbc:mariadb://59.187.214.156:13306/check-dev?allowMultiQueries=true&characterEncoding=UTF-8
+        url: jdbc:log4jdbc:mariadb://59.187.214.156:13306/checkin-dev?allowMultiQueries=true&characterEncoding=UTF-8
         username: ${DB_USER}
         password: ${DB_PASS}
         hikari:
