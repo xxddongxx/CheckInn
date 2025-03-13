@@ -9,6 +9,7 @@ spring:
         restart:
             enabled: false
 
+    # datasource
     datasource:
         driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
         url: jdbc:log4jdbc:mariadb://59.187.214.156:13306/checkin-dev?allowMultiQueries=true&characterEncoding=UTF-8
@@ -19,6 +20,7 @@ spring:
             maximum-pool-size: 10
             minimum-idle: 5
 
+# logging
 logging:
     pattern:
         console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -29,3 +31,21 @@ logging:
         jdbc.connection: OFF
         jdbc.sqltiming: DEBUG
         jdbc.resultsettable: OFF
+
+# swagger
+springdoc:
+    api-docs:
+        path: /api-docs
+        groups:
+            enabled: true
+    swagger-ui:
+        path: /swagger-ui.html
+        enabled: true
+        groups-order: ASC
+        tags-sorter: alpha
+        operations-sorter: alpha
+        display-request-duration: true
+        doc-expansion: none
+    cache:
+        disabled: true
+    model-and-view-allowed: true

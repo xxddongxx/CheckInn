@@ -1,4 +1,4 @@
-package com.xxddongxx.checkinn.config;
+package com.xxddongxx.checkinn.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
