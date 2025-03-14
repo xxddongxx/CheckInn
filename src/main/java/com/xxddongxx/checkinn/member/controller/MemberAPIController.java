@@ -40,7 +40,6 @@ public class MemberAPIController {
         logger.info("Insert Member");
         int result = memberService.insertMember(memberDto);
 
-
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Message.success("멤버가 성공적으로 등록되었습니다.", result));
     }

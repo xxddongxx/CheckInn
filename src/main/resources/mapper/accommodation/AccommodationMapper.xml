@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapepr 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxddongxx.checkinn.accommodation.mapper.AccommodationMapper">
+    <insert id="insertAccommodation" useGeneratedKeys="true" keyProperty="idx">
+        /* insertAccommodation */
+        INSERT INTO tb_accommodation(
+            acc_nm
+            , acc_post_code
+            , acc_full_address
+            , acc_phone
+            , acc_type
+            , chi_available_Time1
+            , chi_available_Time2
+            , cho_available_Time
+            , owner_nm
+            , owner_phone
+            , acc_agreement1
+            , acc_agreement2
+            , acc_agreement3
+            , manager
+            , is_active
+        ) VALUES (
+            #{accNm}
+            , #{accPostCode}
+            , #{accFullAddress}
+            , #{accPhone}
+            , #{accType}
+            , #{chiAvailableTile1}
+            , #{chiAvailableTime2}
+            , #{choAvailableTime}
+            , #{ownerNm}
+            , #{ownerPhone}
+            , #{accAgreement1}
+            , #{accAgreement2}
+            , #{accAgreement3}
+            , #{manager}
+            , #{isActive}
+            )
+    </insert>
+</mapper>
