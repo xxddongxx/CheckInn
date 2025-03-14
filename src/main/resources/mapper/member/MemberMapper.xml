@@ -17,7 +17,7 @@
             IF(COUNT(*) > 0, 1, 0)
         FROM tb_user tu
         WHERE
-            tu.user_id = #{userId}
+            tu.user_id = #{value}
             AND tu.delete_at = 'N'
     </select>
     <insert id="insertMember" parameterType="Member">
@@ -41,4 +41,14 @@
             , #{deleteAt}
         )
     </insert>
+    <select id="isOwner" resultType="boolean">
+        /* isOwner */
+        SELECT
+            IF(COUNT(*), 1, 0)
+        FROM tb_user tu
+        WHERE
+            tu.role = 'OWNER'
+            AND tu.user_id = #{value}
+            AND tu.delete_at = 'N';
+    </select>
 </mapper>

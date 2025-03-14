@@ -8,5 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberMapper {
     int insertMember(Member member);
     Member selectByMember(String userId);
-    boolean isDuplicate(MemberDto memberDto);
+    boolean isDuplicate(String userId);
+    boolean isOwner(String ownerId);
 }

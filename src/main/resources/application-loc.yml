@@ -49,3 +49,4 @@ springdoc:
     cache:
         disabled: true
     model-and-view-allowed: true
+    override-with-generic-response: false
