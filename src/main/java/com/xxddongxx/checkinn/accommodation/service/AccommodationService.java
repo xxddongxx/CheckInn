@@ -5,6 +5,7 @@ import com.xxddongxx.checkinn.accommodation.mapper.AccommodationMapper;
 import com.xxddongxx.checkinn.accommodation.model.Accommodation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ public class AccommodationService {
     private Logger logger = LoggerFactory.getLogger(AccommodationService.class);
     private AccommodationMapper accommodationMapper;
 
+    @Autowired
     public AccommodationService(AccommodationMapper accommodationMapper) {
         this.accommodationMapper = accommodationMapper;
     }

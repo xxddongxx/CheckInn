@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class AccommodationAPIController {
     private Logger logger = LoggerFactory.getLogger(AccommodationAPIController.class);
     private AccommodationService accommodationService;
 
+    @Autowired
     public AccommodationAPIController(AccommodationService accommodationService){
         this.accommodationService = accommodationService;
     }
@@ -45,4 +47,6 @@ public class AccommodationAPIController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(Message.success(null));
     }
+
+
 }

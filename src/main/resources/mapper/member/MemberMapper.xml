@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapepr 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xxddongxx.checkinn.member.mapper.MemberMapper">
-    <select id="selectByMember" resultType="Member">
-        /* selectByMember */
+    <select id="loadUsrByUsername" resultType="Member">
+        /* loadUsrByUsername */
         SELECT
             *
         FROM tb_user tu
@@ -50,5 +50,61 @@
             tu.role = 'OWNER'
             AND tu.user_id = #{value}
             AND tu.delete_at = 'N';
+    </select>
+    <select id="selectByMember" parameterType="long" resultType="Member">
+        /* selectByMember */
+        SELECT
+            tu.idx
+            , tu.user_id
+            , tu.nm
+            , tu.role
+            , tu.email
+            , tu.phone
+            , tu.delete_at
+            , tu.created_at
+            , tu.updated_at
+        FROM tb_user tu
+        WHERE
+            tu.idx = #{idx}
+            AND tu.delete_at = 'N'
+    </select>
+    <update id="updateMember" parameterType="Member">
+        /* updateMember */
+        UPDATE tb_user SET
+            updated_at = NOW()
+            <if test="nm != null and nm != '' ">
+                , nm = #{nm}
+            </if>
+            <if test="role != null">
+                , `role` = #{role}
+            </if>
+            <if test="email != null and email != '' ">
+                , email = #{email}
+            </if>
+            <if test="phone != null and phone != '' ">
+                , phone = #{phone}
+            </if>
+            <if test="deleteAt != null and deleteAt != '' ">
+                , delete_at = #{deleteAt}
+            </if>
+        WHERE
+            idx = #{idx}
+    </update>
+    <select id="selectByAllMember" resultType="Member">
+        /* selectByAllMember */
+        SELECT
+            tu.idx
+            , tu.user_id
+            , tu.nm
+            , tu.role
+            , tu.email
+            , tu.phone
+            , tu.delete_at
+            , tu.created_at
+            , tu.updated_at
+        FROM tb_user tu
+        WHERE
+            tu.delete_at = 'N'
+        ORDER BY tu.created_at desc
     </select>
 </mapper>
