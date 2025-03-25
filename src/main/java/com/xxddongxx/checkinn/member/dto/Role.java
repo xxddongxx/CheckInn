@@ -1,4 +1,4 @@
-package com.xxddongxx.checkinn.member.model;
+package com.xxddongxx.checkinn.member.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

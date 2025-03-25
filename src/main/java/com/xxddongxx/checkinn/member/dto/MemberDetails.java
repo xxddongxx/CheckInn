@@ -1,4 +1,4 @@
-package com.xxddongxx.checkinn.member.model;
+package com.xxddongxx.checkinn.member.dto;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,27 +12,27 @@ import java.util.Collection;
 public class MemberDetails implements UserDetails {
 
     String ROLE_PREFIX = "ROLE_";
-    private Member member;
+    private MemberDto memberDto;
 
-    public MemberDetails(Member member){
-        this.member = member;
+    public MemberDetails(MemberDto member){
+        this.memberDto = memberDto;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + member.getRole().toString()));
+        authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + memberDto.getRole().toString()));
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return member.getPassword();
+        return memberDto.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return member.getUserId();
+        return memberDto.getUserId();
     }
 
     @Override

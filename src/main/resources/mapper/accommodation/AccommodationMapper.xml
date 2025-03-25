@@ -38,12 +38,17 @@
             , #{isActive}
             )
     </insert>
-    <select id="selectByAccommodation" parameterType="long" resultType="Accommodation">
+    <select id="selectByAccommodation" parameterType="long" resultType="AccommodationDto">
         /* selectByAccommodation */
         select
-            *
+            ta.*
+            , tu.user_id as manager_user_id
+            , tu.nm as manager_nm
+            , tu.role as manager_role
+            , tu.email as manager_email
+            , tu.phone as manager_phone
         from tb_accommodation ta
-        inner join tb_user tu on tu.idx = ta.manager
+        inner join tb_user tu on tu.user_id = ta.manager_id
         where
             ta.idx = #{value}
 

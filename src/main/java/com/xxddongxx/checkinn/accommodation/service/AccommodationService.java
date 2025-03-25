@@ -2,7 +2,6 @@ package com.xxddongxx.checkinn.accommodation.service;
 
 import com.xxddongxx.checkinn.accommodation.dto.AccommodationDto;
 import com.xxddongxx.checkinn.accommodation.mapper.AccommodationMapper;
-import com.xxddongxx.checkinn.accommodation.model.Accommodation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +20,13 @@ public class AccommodationService {
 
     @Transactional
     public int insertAccommodation(AccommodationDto accommodationDto) {
-        int result = accommodationMapper.insertAccommodation(new Accommodation().toEntity(accommodationDto));
+        int result = accommodationMapper.insertAccommodation(accommodationDto);
         return result;
     }
 
     @Transactional(readOnly = true)
     public AccommodationDto selectByAccommodation(long idx){
-        Accommodation accommodation = accommodationMapper.selectByAccommodation(idx);
-        return new AccommodationDto().toDto(accommodation);
+        AccommodationDto accommodation = accommodationMapper.selectByAccommodation(idx);
+        return accommodation;
     }
 }

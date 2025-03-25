@@ -12,8 +12,8 @@
     </settings>
 
     <typeAliases>
-        <package name="com.xxddongxx.checkinn.member.model"/>
-        <package name="com.xxddongxx.checkinn.accommodation.model"/>
+        <package name="com.xxddongxx.checkinn.member.dto"/>
+        <package name="com.xxddongxx.checkinn.accommodation.dto"/>
     </typeAliases>
 
 </configuration>

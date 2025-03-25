@@ -1,7 +1,6 @@
 package com.xxddongxx.checkinn.accommodation.controller;
 
 import com.xxddongxx.checkinn.accommodation.dto.AccommodationDto;
-import com.xxddongxx.checkinn.accommodation.model.Accommodation;
 import com.xxddongxx.checkinn.accommodation.service.AccommodationService;
 import com.xxddongxx.checkinn.util.Message;
 import io.swagger.v3.oas.annotations.Operation;

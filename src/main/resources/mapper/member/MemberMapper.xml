@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapepr 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xxddongxx.checkinn.member.mapper.MemberMapper">
-    <select id="loadUsrByUsername" resultType="Member">
+    <select id="loadUsrByUsername" resultType="MemberDto">
         /* loadUsrByUsername */
         SELECT
             *
@@ -20,7 +20,7 @@
             tu.user_id = #{value}
             AND tu.delete_at = 'N'
     </select>
-    <insert id="insertMember" parameterType="Member">
+    <insert id="insertMember" parameterType="MemberDto">
         /* insertMember */
         INSERT INTO tb_user(
             user_id
@@ -51,7 +51,7 @@
             AND tu.user_id = #{value}
             AND tu.delete_at = 'N';
     </select>
-    <select id="selectByMember" parameterType="long" resultType="Member">
+    <select id="selectByMember" parameterType="long" resultType="MemberDto">
         /* selectByMember */
         SELECT
             tu.idx
@@ -68,7 +68,7 @@
             tu.idx = #{idx}
             AND tu.delete_at = 'N'
     </select>
-    <update id="updateMember" parameterType="Member">
+    <update id="updateMember" parameterType="MemberDto">
         /* updateMember */
         UPDATE tb_user SET
             updated_at = NOW()
@@ -90,7 +90,7 @@
         WHERE
             idx = #{idx}
     </update>
-    <select id="selectByAllMember" resultType="Member">
+    <select id="selectByAllMember" resultType="MemberDto">
         /* selectByAllMember */
         SELECT
             tu.idx

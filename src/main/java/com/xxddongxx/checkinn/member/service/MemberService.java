@@ -3,9 +3,8 @@ package com.xxddongxx.checkinn.member.service;
 import com.xxddongxx.checkinn.config.exception.CustomException;
 import com.xxddongxx.checkinn.member.dto.MemberDto;
 import com.xxddongxx.checkinn.member.mapper.MemberMapper;
-import com.xxddongxx.checkinn.member.model.Member;
-import com.xxddongxx.checkinn.member.model.MemberDetails;
-import com.xxddongxx.checkinn.member.model.Role;
+import com.xxddongxx.checkinn.member.dto.MemberDetails;
+import com.xxddongxx.checkinn.member.dto.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class MemberService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        Optional<Member> member = Optional.ofNullable(memberMapper.loadUsrByUsername(userId));
+        Optional<MemberDto> member = Optional.ofNullable(memberMapper.loadUsrByUsername(userId));
 
         if (!member.isPresent()){
             throw new IllegalArgumentException("User not authorized.");
@@ -58,7 +57,7 @@ public class MemberService implements UserDetailsService {
         }
 
 
-        return memberMapper.insertMember(new Member().toEntity(memberDto));
+        return memberMapper.insertMember(memberDto);
     }
 
     @Transactional(readOnly = true)
@@ -73,24 +72,24 @@ public class MemberService implements UserDetailsService {
 
     @Transactional(readOnly = true)
     public MemberDto selectByMember(long idx) {
-        Optional<Member> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
+        Optional<MemberDto> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
 
         if(selectMember.isEmpty()){
             throw new CustomException(HttpStatus.NOT_FOUND, "해당 유적를 찾을 수 없습니다.");
         }
 
-        return new MemberDto().toDto(selectMember.get());
+        return selectMember.get();
     }
 
     @Transactional
     public MemberDto updateMember(long idx, MemberDto memberDto) {
-        Optional<Member> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
+        Optional<MemberDto> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
 
         if(selectMember.isEmpty()){
             throw new CustomException(HttpStatus.NOT_FOUND, "해당 유적를 찾을 수 없습니다.");
         }
 
-        Member updateTarget = selectMember.get();
+        MemberDto updateTarget = selectMember.get();
         try {
             updateTarget.setNm(memberDto.getNm());
             updateTarget.setRole(Role.valueOf(memberDto.getRole().toString()));
@@ -103,27 +102,25 @@ public class MemberService implements UserDetailsService {
 
         memberMapper.updateMember(updateTarget);
 
-        Optional<Member> resultMember = Optional.ofNullable(memberMapper.selectByMember(idx));
-        return new MemberDto().toDto(resultMember.get());
+        Optional<MemberDto> resultMember = Optional.ofNullable(memberMapper.selectByMember(idx));
+        return resultMember.get();
     }
 
     @Transactional
     public int deleteMember(long idx){
-        Optional<Member> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
+        Optional<MemberDto> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
 
         if(selectMember.isEmpty()){
             throw new CustomException(HttpStatus.NOT_FOUND, "해당 유적를 찾을 수 없습니다.");
         }
-        Member deleteMember = selectMember.get();
+        MemberDto deleteMember = selectMember.get();
         deleteMember.setDeleteAt('Y');
         return memberMapper.updateMember(deleteMember);
     }
 
     @Transactional(readOnly = true)
     public List<MemberDto> selectByAllMember(){
-        List<Member> memberList = memberMapper.selectByAllMember();
-
-        List<MemberDto> memberDtoList = memberList.stream().map( obj -> new MemberDto().toDto(obj)).toList();
-        return memberDtoList;
+        List<MemberDto> memberList = memberMapper.selectByAllMember();
+        return memberList;
     }
 }
