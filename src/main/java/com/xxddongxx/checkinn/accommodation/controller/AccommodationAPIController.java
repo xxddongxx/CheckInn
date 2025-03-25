@@ -14,10 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/accommodations")
@@ -31,6 +28,10 @@ public class AccommodationAPIController {
         this.accommodationService = accommodationService;
     }
 
+    /**
+     * 숙박업소 생성 api
+     * @param accommodationDto
+     * */
     @PostMapping
     @Operation(summary = "Accommodation 생성", description = "숙박업소 등록")
     @ApiResponse(responseCode = "201", description = "숙박업소가 정상적으로 등록되었습니다.")
@@ -41,12 +42,31 @@ public class AccommodationAPIController {
             @RequestBody AccommodationDto accommodationDto){
         logger.info("Insert Accommodation");
 
-        accommodationService.insertAccommodation(accommodationDto);
-
+        int result = accommodationService.insertAccommodation(accommodationDto);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(Message.success(null));
+                .body(Message.success(result));
     }
 
 
+    /**
+     * 숙박업소 조회 api
+     * @param idx
+     * */
+    @GetMapping("/{idx}")
+    @Operation(summary = "숙박업소 조회", description = "특정 숙박업소 조회")
+    @ApiResponse(responseCode = "200", description = "요청이 성공적으로 처리되었습니다.")
+    @ApiResponse(responseCode = "404", description = "숙박업소가 존재한지 않습니다.")
+    @ApiResponse(responseCode = "500", description = "서버 오류가 발생했습니다.")
+    public ResponseEntity<Message<AccommodationDto>> selectByAccommodation(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @PathVariable("idx") long idx) {
+        logger.info("select accommodation");
+
+        AccommodationDto accommodation = accommodationService.selectByAccommodation(idx);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Message.success(accommodation));
+
+    }
 }

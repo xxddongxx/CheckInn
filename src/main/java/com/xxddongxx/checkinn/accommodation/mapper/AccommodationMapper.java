@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AccommodationMapper {
     int insertAccommodation(Accommodation accommodation);
+    Accommodation selectByAccommodation(long idx);
 }

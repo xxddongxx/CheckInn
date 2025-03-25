@@ -34,8 +34,18 @@
             , #{accAgreement1}
             , #{accAgreement2}
             , #{accAgreement3}
-            , #{manager}
+            , #{managerIdx}
             , #{isActive}
             )
     </insert>
+    <select id="selectByAccommodation" parameterType="long" resultType="Accommodation">
+        /* selectByAccommodation */
+        select
+            *
+        from tb_accommodation ta
+        inner join tb_user tu on tu.idx = ta.manager
+        where
+            ta.idx = #{value}
+
+    </select>
 </mapper>

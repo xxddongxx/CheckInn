@@ -30,6 +30,7 @@ public class Accommodation {
     private String accAgreement1;
     private String accAgreement2;
     private String accAgreement3;
+    private long managerIdx;
     private Member manager;
     private boolean isActive;
     private LocalDateTime createdAt;
@@ -55,6 +56,7 @@ public class Accommodation {
                 .accAgreement1(accommodationDto.getAccAgreement1())
                 .accAgreement2(accommodationDto.getAccAgreement2())
                 .accAgreement3(accommodationDto.getAccAgreement3())
+                .managerIdx(accommodationDto.getManagerIdx())
                 .manager(accommodationDto.getManager())
                 .isActive(accommodationDto.isActive())
                 .createdAt(accommodationDto.getCreatedAt())

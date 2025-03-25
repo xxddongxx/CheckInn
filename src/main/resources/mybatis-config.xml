@@ -13,6 +13,7 @@
 
     <typeAliases>
         <package name="com.xxddongxx.checkinn.member.model"/>
+        <package name="com.xxddongxx.checkinn.accommodation.model"/>
     </typeAliases>
 
 </configuration>
