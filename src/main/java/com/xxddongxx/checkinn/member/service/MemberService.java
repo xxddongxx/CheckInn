@@ -35,12 +35,12 @@ public class MemberService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        Optional<MemberDto> member = Optional.ofNullable(memberMapper.loadUsrByUsername(userId));
+        MemberDto member = memberMapper.loadUsrByUsername(userId);
 
-        if (!member.isPresent()){
+        if (member == null){
             throw new IllegalArgumentException("User not authorized.");
         }
-        return new MemberDetails(member.get());
+        return new MemberDetails(member);
     }
 
     @Transactional
@@ -55,7 +55,6 @@ public class MemberService implements UserDetailsService {
         if(memberDto.getRole() == null){
             memberDto.setRole(Role.STAFF);
         }
-
 
         return memberMapper.insertMember(memberDto);
     }
@@ -72,50 +71,38 @@ public class MemberService implements UserDetailsService {
 
     @Transactional(readOnly = true)
     public MemberDto selectByMember(long idx) {
-        Optional<MemberDto> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
+        MemberDto selectMember = memberMapper.selectByMember(idx);
 
-        if(selectMember.isEmpty()){
+        if(selectMember == null){
             throw new CustomException(HttpStatus.NOT_FOUND, "해당 유적를 찾을 수 없습니다.");
         }
 
-        return selectMember.get();
+        return selectMember;
     }
 
     @Transactional
     public MemberDto updateMember(long idx, MemberDto memberDto) {
-        Optional<MemberDto> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
+        MemberDto selectMember = memberMapper.selectByMember(idx);
 
-        if(selectMember.isEmpty()){
+        if(selectMember == null){
             throw new CustomException(HttpStatus.NOT_FOUND, "해당 유적를 찾을 수 없습니다.");
         }
 
-        MemberDto updateTarget = selectMember.get();
-        try {
-            updateTarget.setNm(memberDto.getNm());
-            updateTarget.setRole(Role.valueOf(memberDto.getRole().toString()));
-            updateTarget.setEmail(memberDto.getEmail());
-            updateTarget.setPhone(memberDto.getPhone());
-            updateTarget.setDeleteAt(memberDto.getDeleteAt());
-        } catch (CustomException e){
-            throw new CustomException(HttpStatus.BAD_REQUEST, "잘못된 요청입니다. 다시 확인해주세요.");
-        }
+        memberMapper.updateMember(selectMember);
 
-        memberMapper.updateMember(updateTarget);
-
-        Optional<MemberDto> resultMember = Optional.ofNullable(memberMapper.selectByMember(idx));
-        return resultMember.get();
+        return memberMapper.selectByMember(idx);
     }
 
     @Transactional
     public int deleteMember(long idx){
-        Optional<MemberDto> selectMember = Optional.ofNullable(memberMapper.selectByMember(idx));
+        MemberDto selectMember = memberMapper.selectByMember(idx);
 
-        if(selectMember.isEmpty()){
+        if(selectMember == null){
             throw new CustomException(HttpStatus.NOT_FOUND, "해당 유적를 찾을 수 없습니다.");
         }
-        MemberDto deleteMember = selectMember.get();
-        deleteMember.setDeleteAt('Y');
-        return memberMapper.updateMember(deleteMember);
+
+        selectMember.setDeleteAt('Y');
+        return memberMapper.updateMember(selectMember);
     }
 
     @Transactional(readOnly = true)

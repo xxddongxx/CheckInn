@@ -36,7 +36,7 @@ public class AccommodationDto {
     private LocalDateTime updatedAt;
 
     // Manager
-    private String managerUserId;
+    private String managerId;
     private String managerNm;
     private Role managerRole;
     private String managerEmail;

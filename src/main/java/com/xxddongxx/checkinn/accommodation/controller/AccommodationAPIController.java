@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/accommodations")
 @Tag(name = "02. Accommodation", description = "Accommodation API 입니다.")
@@ -55,7 +57,7 @@ public class AccommodationAPIController {
     @GetMapping("/{idx}")
     @Operation(summary = "숙박업소 조회", description = "특정 숙박업소 조회")
     @ApiResponse(responseCode = "200", description = "요청이 성공적으로 처리되었습니다.")
-    @ApiResponse(responseCode = "404", description = "숙박업소가 존재한지 않습니다.")
+    @ApiResponse(responseCode = "404", description = "해당 수박업소를 찾을 수 없습니다.")
     @ApiResponse(responseCode = "500", description = "서버 오류가 발생했습니다.")
     public ResponseEntity<Message<AccommodationDto>> selectByAccommodation(
             HttpServletRequest request,
@@ -67,5 +69,43 @@ public class AccommodationAPIController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(Message.success(accommodation));
 
+    }
+
+    /**
+     * 숙박업소 수정 api
+     * @param idx
+     * */
+    @PutMapping("/{idx}")
+    @Operation(summary = "숙박업소 수정", description = "특정 숙박업소 수정")
+    @ApiResponse(responseCode = "200", description = "요청이 성공적으로 처리되었습니다.")
+    @ApiResponse(responseCode = "404", description = "해당 수박업소를 찾을 수 없습니다.")
+    @ApiResponse(responseCode = "500", description = "서버 오류가 발생했습니다.")
+    public ResponseEntity<Message<AccommodationDto>> updateAccommodation(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @PathVariable("idx") long idx,
+            @RequestBody AccommodationDto accommodationDto) {
+        logger.info("update accommodation");
+
+        AccommodationDto accommodation = accommodationService.updateAccommodation(idx, accommodationDto);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Message.success(accommodation));
+
+    }
+
+    @GetMapping
+    @Operation(summary = "숙박업소 전체 조회", description = "숙박업소 전체 조회")
+    @ApiResponse(responseCode = "200", description = "요청이 성공적으로 처리되었습니다.")
+    @ApiResponse(responseCode = "404", description = "숙박업소를 찾지 못했습니다.")
+    @ApiResponse(responseCode = "500", description = "서버 오류가 발생했습니다.")
+    public ResponseEntity<Message<List<AccommodationDto>>> selectByAllAccommodation(
+            HttpServletRequest request,
+            HttpServletResponse response) {
+        logger.info("select All Accommodation");
+
+        List<AccommodationDto> accommodationDtoList = accommodationService.selectByAllAccommodation();
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Message.success(accommodationDtoList));
     }
 }

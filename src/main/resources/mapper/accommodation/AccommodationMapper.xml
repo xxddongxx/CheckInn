@@ -40,17 +40,82 @@
     </insert>
     <select id="selectByAccommodation" parameterType="long" resultType="AccommodationDto">
         /* selectByAccommodation */
-        select
+        SELECT
             ta.*
             , tu.user_id as manager_user_id
             , tu.nm as manager_nm
             , tu.role as manager_role
             , tu.email as manager_email
             , tu.phone as manager_phone
-        from tb_accommodation ta
-        inner join tb_user tu on tu.user_id = ta.manager_id
-        where
+        FROM tb_accommodation ta
+        INNER JOIN tb_user tu on tu.user_id = ta.manager_id
+        WHERE
             ta.idx = #{value}
 
+    </select>
+    <update id="updateAccommodation" parameterType="AccommodationDto">
+        /* updateAccommodation */
+        UPDATE tb_accommodation
+            update_dt = NOW()
+            <if test="accNm != null and accNm != ''">
+                , acc_nm = #{accNm}
+            </if>
+            <if test="accPostCode != null and accPostCode != ''">
+                , acc_post_code = #{accPostCode}
+            </if>
+            <if test="accFullAddress != null and accFullAddress != ''">
+                , acc_full_address = #{accFullAddress}
+            </if>
+            <if test="accPhone != null and accPhone != ''">
+                , acc_phone = #{accPhone}
+            </if>
+            <if test="accType != null and accType != ''">
+                , acc_type = #{accType}
+            </if>
+            <if test="chiAvailableTime1 != null and chiAvailableTime1 != ''">
+                , chi_available_time1 = #{chiAvailableTime1}
+            </if>
+            <if test="chiAvailableTime2 != null and chiAvailableTime2 != ''">
+                , chi_available_time2 = #{chiAvailableTime2}
+            </if>
+            <if test="choAvailableTime != null and choAvailableTime != ''">
+                , cho_available_time = #{choAvailableTime}
+            </if>
+            <if test="ownerNm != null and ownerNm != ''">
+                , owner_nm = #{ownerNm}
+            </if>
+            <if test="ownerPhone != null and ownerPhone != ''">
+                , owner_phone = #{ownerPhone}
+            </if>
+            <if test="accAgreement1 != null and accAgreement1 != ''">
+                , acc_agreement1 = #{accAgreement1}
+            </if>
+            <if test="accAgreement2 != null and accAgreement2 != ''">
+                , acc_agreement2 = #{accAgreement2}
+            </if>
+            <if test="accAgreement3 != null and accAgreement3 != ''">
+                , acc_agreement3 = #{accAgreement3}
+            </if>
+            <if test="isActive != null and isActive != ''">
+                , is_active = #{isActive}
+            </if>
+            <if test="managerId != null and managerId != ''">
+                , manager_id = #{managerId}
+            </if>
+        WHERE
+            idx = #{idx}
+    </update>
+    <select id="selectByAllAccommodation" resultType="AccommodationDto">
+        /* selectByAllAccommodation */
+        SELECT
+            ta.*
+            , tu.user_id as manager_user_id
+            , tu.nm as manager_nm
+            , tu.role as manager_role
+            , tu.email as manager_email
+            , tu.phone as manager_phone
+        FROM tb_accommodation ta
+        INNER JOIN tb_user tu on tu.user_id = ta.manager_id
+        ORDER BY ta.created_at desc
     </select>
 </mapper>
