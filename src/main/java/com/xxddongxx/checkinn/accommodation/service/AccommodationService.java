@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AccommodationService {
@@ -25,8 +24,7 @@ public class AccommodationService {
 
     @Transactional
     public int insertAccommodation(AccommodationDto accommodationDto) {
-        int result = accommodationMapper.insertAccommodation(accommodationDto);
-        return result;
+        return accommodationMapper.insertAccommodation(accommodationDto);
     }
 
     @Transactional(readOnly = true)

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapepr 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxddongxx.checkinn.option.mapper.OptionMapper">
+    <insert id="insertOption" parameterType="OptionDto">
+        /* insertOption */
+        INSERT INTO tb_option(nm, description)
+        VALUES (#{nm}, #{description})
+    </insert>
+    <select id="selectByOption" parameterType="long" resultType="OptionDto">
+        /* selectByOption */
+        SELECT
+            *
+        FROM tb_option to
+        WHERE
+            to.idx = #{value}
+    </select>
+    <select id="selectByAllOption" resultType="OptionDto">
+        /* selectByAllOption */
+        SELECT
+            *
+        FROM tb_option
+    </select>
+    <update id="updateOption" parameterType="OptionDto">
+        /* updateOption */
+        UPDATE tb_option
+        SET
+            nm = #{nm}
+            <if test="description != null and description != ''">
+                , description = #{description}
+            </if>
+    </update>
+</mapper>

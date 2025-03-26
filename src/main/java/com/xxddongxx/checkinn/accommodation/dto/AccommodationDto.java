@@ -1,7 +1,6 @@
 package com.xxddongxx.checkinn.accommodation.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.xxddongxx.checkinn.member.dto.MemberDto;
 import com.xxddongxx.checkinn.member.dto.Role;
 import lombok.*;
 
