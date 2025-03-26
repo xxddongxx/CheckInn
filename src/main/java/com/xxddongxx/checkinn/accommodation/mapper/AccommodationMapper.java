@@ -11,4 +11,5 @@ public interface AccommodationMapper {
     AccommodationDto selectByAccommodation(long idx);
     int updateAccommodation(AccommodationDto accommodationDto);
     List<AccommodationDto> selectByAllAccommodation();
+    int deleteAccommodation(long idx);
 }

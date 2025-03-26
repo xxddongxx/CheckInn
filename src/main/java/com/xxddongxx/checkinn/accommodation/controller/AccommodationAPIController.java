@@ -108,4 +108,20 @@ public class AccommodationAPIController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(Message.success(accommodationDtoList));
     }
+
+    @DeleteMapping("/{idx}")
+    @Operation(summary = "숙박업소 삭제", description = "숙바업소 삭제")
+    @ApiResponse(responseCode = "200", description = "요청잉 성공적으로 처리되었습니다.")
+    @ApiResponse(responseCode = "404", description = "숙박업소를 찾지 못했습니다.")
+    @ApiResponse(responseCode = "500", description = "서버 오류가 발생했습니다.")
+    public ResponseEntity<Message<?>> deleteAccommodation(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @PathVariable("idx") long idx) {
+        logger.info("delete Accommodation");
+
+        accommodationService.deleteAccommodation(idx);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Message.success(null));
+    }
 }

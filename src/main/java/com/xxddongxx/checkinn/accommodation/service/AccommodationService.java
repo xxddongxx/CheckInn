@@ -57,4 +57,14 @@ public class AccommodationService {
     public List<AccommodationDto> selectByAllAccommodation(){
         return accommodationMapper.selectByAllAccommodation();
     }
+
+    @Transactional
+    public int deleteAccommodation(long idx) {
+        AccommodationDto selectAccommodation = accommodationMapper.selectByAccommodation(idx);
+
+        if(selectAccommodation == null) {
+            throw new CustomException(HttpStatus.NOT_FOUND, "해당 수박업소를 찾을 수 없습니다.");
+        }
+        return accommodationMapper.deleteAccommodation(idx);
+    }
 }

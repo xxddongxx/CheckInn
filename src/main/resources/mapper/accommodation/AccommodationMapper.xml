@@ -118,4 +118,8 @@
         INNER JOIN tb_user tu on tu.user_id = ta.manager_id
         ORDER BY ta.created_at desc
     </select>
+    <delete id="deleteAccommodation" parameterType="long" >
+        /* deleteAccommodation */
+        DELETE FROM tb_accommodation WHERE idx = #{value}
+    </delete>
 </mapper>
