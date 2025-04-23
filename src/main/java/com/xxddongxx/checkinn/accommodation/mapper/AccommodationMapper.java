@@ -8,8 +8,8 @@ import java.util.List;
 @Mapper
 public interface AccommodationMapper {
     int insertAccommodation(AccommodationDto accommodation);
-    AccommodationDto selectByAccommodation(long idx);
+    AccommodationDto selectByAccommodation(Long idx);
     int updateAccommodation(AccommodationDto accommodationDto);
     List<AccommodationDto> selectByAllAccommodation();
-    int deleteAccommodation(long idx);
+    int deleteAccommodation(Long idx);
 }

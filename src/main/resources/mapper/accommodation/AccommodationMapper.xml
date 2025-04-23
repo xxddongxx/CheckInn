@@ -38,7 +38,7 @@
             , #{isActive}
             )
     </insert>
-    <select id="selectByAccommodation" parameterType="long" resultType="AccommodationDto">
+    <select id="selectByAccommodation" parameterType="Long" resultType="AccommodationDto">
         /* selectByAccommodation */
         SELECT
             ta.*
@@ -118,7 +118,7 @@
         INNER JOIN tb_user tu on tu.user_id = ta.manager_id
         ORDER BY ta.created_at desc
     </select>
-    <delete id="deleteAccommodation" parameterType="long" >
+    <delete id="deleteAccommodation" parameterType="Long" >
         /* deleteAccommodation */
         DELETE FROM tb_accommodation WHERE idx = #{value}
     </delete>

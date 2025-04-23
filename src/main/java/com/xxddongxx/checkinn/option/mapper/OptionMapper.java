@@ -9,6 +9,6 @@ import java.util.List;
 public interface OptionMapper {
     int insertOption(OptionDto optionDto);
     int updateOption(OptionDto optionDto);
-    OptionDto selectByOption(long idx);
+    OptionDto selectByOption(Long idx);
     List<OptionDto> selectByAllOption();
 }

@@ -14,7 +14,8 @@
     <typeAliases>
         <package name="com.xxddongxx.checkinn.member.dto"/>
         <package name="com.xxddongxx.checkinn.accommodation.dto"/>
-        <package name="com.xxddongxx.checkinn.optioin.dto"/>
+        <package name="com.xxddongxx.checkinn.option.dto"/>
+        <package name="java.lang"/>
     </typeAliases>
 
 </configuration>

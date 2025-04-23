@@ -51,7 +51,7 @@
             AND tu.user_id = #{value}
             AND tu.delete_at = 'N';
     </select>
-    <select id="selectByMember" parameterType="long" resultType="MemberDto">
+    <select id="selectByMember" parameterType="Long" resultType="MemberDto">
         /* selectByMember */
         SELECT
             tu.idx

@@ -112,7 +112,7 @@ public class MemberAPIController {
     public ResponseEntity<Message<MemberDto>> selectByMember(
             HttpServletRequest request,
             HttpServletResponse response,
-            @PathVariable("idx") long idx) {
+            @PathVariable("idx") Long idx) {
         logger.info("select Member");
 
         MemberDto resultMemberDto = memberService.selectByMember(idx);
@@ -134,7 +134,7 @@ public class MemberAPIController {
     public ResponseEntity<Message<MemberDto>> updateByMember(
             HttpServletRequest request,
             HttpServletResponse response,
-            @PathVariable("idx") long idx,
+            @PathVariable("idx") Long idx,
             @RequestBody MemberDto memberDto) {
         logger.info("update member");
 
@@ -156,7 +156,7 @@ public class MemberAPIController {
     public ResponseEntity<Message<?>> deleteMember(
             HttpServletRequest request,
             HttpServletResponse response,
-            @PathVariable("idx") long idx) {
+            @PathVariable("idx") Long idx) {
         logger.info("delete Member");
         int result = memberService.deleteMember(idx);
         

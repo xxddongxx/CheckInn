@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDto {
-    private long idx;
+    private Long idx;
     private String userId;
     private String password;
     private String nm;

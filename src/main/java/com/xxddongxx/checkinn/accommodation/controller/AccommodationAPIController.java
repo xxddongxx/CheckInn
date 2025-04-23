@@ -62,7 +62,7 @@ public class AccommodationAPIController {
     public ResponseEntity<Message<AccommodationDto>> selectByAccommodation(
             HttpServletRequest request,
             HttpServletResponse response,
-            @PathVariable("idx") long idx) {
+            @PathVariable("idx") Long idx) {
         logger.info("select accommodation");
 
         AccommodationDto accommodation = accommodationService.selectByAccommodation(idx);
@@ -83,7 +83,7 @@ public class AccommodationAPIController {
     public ResponseEntity<Message<AccommodationDto>> updateAccommodation(
             HttpServletRequest request,
             HttpServletResponse response,
-            @PathVariable("idx") long idx,
+            @PathVariable("idx") Long idx,
             @RequestBody AccommodationDto accommodationDto) {
         logger.info("update accommodation");
 
@@ -117,7 +117,7 @@ public class AccommodationAPIController {
     public ResponseEntity<Message<?>> deleteAccommodation(
             HttpServletRequest request,
             HttpServletResponse response,
-            @PathVariable("idx") long idx) {
+            @PathVariable("idx") Long idx) {
         logger.info("delete Accommodation");
 
         accommodationService.deleteAccommodation(idx);

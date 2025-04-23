@@ -70,7 +70,7 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public MemberDto selectByMember(long idx) {
+    public MemberDto selectByMember(Long idx) {
         MemberDto selectMember = memberMapper.selectByMember(idx);
 
         if(selectMember == null){
@@ -81,7 +81,7 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
-    public MemberDto updateMember(long idx, MemberDto memberDto) {
+    public MemberDto updateMember(Long idx, MemberDto memberDto) {
         MemberDto selectMember = memberMapper.selectByMember(idx);
 
         if(selectMember == null){
@@ -94,7 +94,7 @@ public class MemberService implements UserDetailsService {
     }
 
     @Transactional
-    public int deleteMember(long idx){
+    public int deleteMember(Long idx){
         MemberDto selectMember = memberMapper.selectByMember(idx);
 
         if(selectMember == null){

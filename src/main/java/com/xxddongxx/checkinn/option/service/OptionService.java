@@ -22,7 +22,7 @@ public class OptionService {
     }
 
     @Transactional(readOnly = true)
-    public OptionDto selectByOption(long idx) {
+    public OptionDto selectByOption(Long idx) {
         OptionDto selectOptionDto = optionMapper.selectByOption(idx);
 
         if(selectOptionDto == null) {
@@ -42,7 +42,7 @@ public class OptionService {
     }
 
     @Transactional
-    public OptionDto updateOption(long idx, OptionDto optionDto) {
+    public OptionDto updateOption(Long idx, OptionDto optionDto) {
         OptionDto selectOption = optionMapper.selectByOption(idx);
 
         if(selectOption == null) {

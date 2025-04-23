@@ -7,7 +7,7 @@
         INSERT INTO tb_option(nm, description)
         VALUES (#{nm}, #{description})
     </insert>
-    <select id="selectByOption" parameterType="long" resultType="OptionDto">
+    <select id="selectByOption" parameterType="Long" resultType="OptionDto">
         /* selectByOption */
         SELECT
             *

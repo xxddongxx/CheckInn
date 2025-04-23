@@ -11,7 +11,7 @@ public interface MemberMapper {
     MemberDto loadUsrByUsername(String userId);
     boolean isDuplicate(String userId);
     boolean isOwner(String ownerId);
-    MemberDto selectByMember(long idx);
+    MemberDto selectByMember(Long idx);
     int updateMember(MemberDto member);
     List<MemberDto> selectByAllMember();
 }

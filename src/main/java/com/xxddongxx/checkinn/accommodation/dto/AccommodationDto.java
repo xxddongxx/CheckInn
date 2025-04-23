@@ -2,10 +2,12 @@ package com.xxddongxx.checkinn.accommodation.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xxddongxx.checkinn.member.dto.Role;
+import com.xxddongxx.checkinn.option.dto.OptionDto;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Builder
 @Getter
@@ -13,7 +15,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccommodationDto {
-    private long idx;
+    private Long idx;
     private String accNm;
     private String accPostCode;
     private String accFullAddress;
@@ -40,4 +42,8 @@ public class AccommodationDto {
     private Role managerRole;
     private String managerEmail;
     private String managerPhone;
+
+    // 숙박업소 옵션 정보
+    private List<Long> optionIdxList;
+    private List<OptionDto> optionList;
 }
